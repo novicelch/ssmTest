@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.liu.dao.RoleMapper">
+  <resultMap id="BaseResultMap" type="cn.liu.pojo.Role">
+    <id column="r_id" jdbcType="VARCHAR" property="rId" />
+    <result column="r_name" jdbcType="VARCHAR" property="rName" />
+    <result column="r_password" jdbcType="VARCHAR" property="rPassword" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    r_id, r_name, r_password
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from role
+    where r_id = #{rId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from role
+    where r_id = #{rId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.liu.pojo.Role">
+    insert into role (r_id, r_name, r_password
+      )
+    values (#{rId,jdbcType=VARCHAR}, #{rName,jdbcType=VARCHAR}, #{rPassword,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.liu.pojo.Role">
+    insert into role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rId != null">
+        r_id,
+      </if>
+      <if test="rName != null">
+        r_name,
+      </if>
+      <if test="rPassword != null">
+        r_password,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rId != null">
+        #{rId,jdbcType=VARCHAR},
+      </if>
+      <if test="rName != null">
+        #{rName,jdbcType=VARCHAR},
+      </if>
+      <if test="rPassword != null">
+        #{rPassword,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.liu.pojo.Role">
+    update role
+    <set>
+      <if test="rName != null">
+        r_name = #{rName,jdbcType=VARCHAR},
+      </if>
+      <if test="rPassword != null">
+        r_password = #{rPassword,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where r_id = #{rId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.liu.pojo.Role">
+    update role
+    set r_name = #{rName,jdbcType=VARCHAR},
+      r_password = #{rPassword,jdbcType=VARCHAR}
+    where r_id = #{rId,jdbcType=VARCHAR}
+  </update>
+
+
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from role
+    where r_name = #{username,jdbcType=VARCHAR}
+  </select>
+</mapper>

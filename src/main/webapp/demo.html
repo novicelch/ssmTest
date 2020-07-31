@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/static/js2/jquery-3.5.0.min.js"></script>
+    <script src="/static/js2/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            alert(111);
+            var a = ["abc", "bcd", "cdb"];
+            $.ajax({
+                type: "post",
+                url: "/tc/demo.ajax",
+                /*dataType设置返回值类型*/
+                dataType: "text",
+                /*contentType设置传过去的值的数据类型*/
+                // contentType:"application/json",
+                contentType:"application/x-www-form-urlencoded;charset=UTF-8",
+                traditional: true,
+                data: {
+                    a: a
+                },
+                success: function (info) {
+                    alert(info);
+                },
+                error: function () {
+                    alert("ajax ERROR!!!");
+                }
+            })
+        })
+
+    </script>
+
+</head>
+<body>
+<div align="center">
+    用户：<input type="text" name="rId" value=""/>
+    密码：<input type="text" name="rName" value="">
+    <button type="button" onclick="add()">保存</button>
+</div>
+</body>
+</html>
